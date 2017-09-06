@@ -1,0 +1,58 @@
+  CREATE OR REPLACE PACKAGE EMPLOYEES_TAPI IS
+
+/* This is the API for table EMPLOYEES which contains all employee records */
+
+    TYPE employees_tapi_rec IS RECORD (
+        job_id employees.job_id%type,
+        employee_id employees.employee_id%type,
+        salary employees.salary%type,
+        hire_date employees.hire_date%type,
+        department_id employees.department_id%type,
+        last_name employees.last_name%type,
+        email employees.email%type,
+        phone_number employees.phone_number%type,
+        first_name employees.first_name%type,
+        commission_pct employees.commission_pct%type,
+        manager_id employees.manager_id%type
+    );
+
+    TYPE employees_tapi_tab IS
+        TABLE OF employees_tapi_rec;
+
+-- insert
+    PROCEDURE ins (
+        p_job_id           IN employees.job_id%type,
+        p_employee_id      IN employees.employee_id%type DEFAULT NULL,
+        p_salary           IN employees.salary%type DEFAULT NULL,
+        p_hire_date        IN employees.hire_date%type,
+        p_department_id    IN employees.department_id%type DEFAULT NULL,
+        p_last_name        IN employees.last_name%type,
+        p_email            IN employees.email%type,
+        p_phone_number     IN employees.phone_number%type DEFAULT NULL,
+        p_first_name       IN employees.first_name%type DEFAULT NULL,
+        p_commission_pct   IN employees.commission_pct%type DEFAULT NULL,
+        p_manager_id       IN employees.manager_id%type DEFAULT NULL
+    );
+-- update
+
+    PROCEDURE upd (
+        p_job_id           IN employees.job_id%type,
+        p_employee_id      IN employees.employee_id%type DEFAULT NULL,
+        p_salary           IN employees.salary%type DEFAULT NULL,
+        p_hire_date        IN employees.hire_date%type,
+        p_department_id    IN employees.department_id%type DEFAULT NULL,
+        p_last_name        IN employees.last_name%type,
+        p_email            IN employees.email%type,
+        p_phone_number     IN employees.phone_number%type DEFAULT NULL,
+        p_first_name       IN employees.first_name%type DEFAULT NULL,
+        p_commission_pct   IN employees.commission_pct%type DEFAULT NULL,
+        p_manager_id       IN employees.manager_id%type DEFAULT NULL
+    );
+-- delete
+
+    PROCEDURE del (
+        p_email   IN employees.email%type
+    );
+END employees_tapi;
+
+/
